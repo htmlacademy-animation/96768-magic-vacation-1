@@ -354,3 +354,11 @@
 .screen--rules {
   background-color: $c-dark;
 }
+
+
+.screen.active {
+  .intro__message {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
