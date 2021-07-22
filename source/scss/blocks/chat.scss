@@ -185,4 +185,12 @@
 
 .chat__footer {
   margin-top: auto;
+
+  .form__field {
+    width: 0;
+    padding: 0;
+    overflow: hidden;
+    transition: width 0.35s linear, padding 0.35s linear;
+    justify-self: right;
+  }
 }

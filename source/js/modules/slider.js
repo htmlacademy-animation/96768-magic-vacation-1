@@ -68,11 +68,13 @@ export default () => {
         observer: true,
         observeParents: true
       });
+      sliderContainer.classList.add(`is-doubleslide`);
     }
   };
 
   window.addEventListener(`resize`, function () {
     if (storySlider) {
+      sliderContainer.classList.remove(`is-doubleslide`);
       storySlider.destroy();
     }
     setSlider();
