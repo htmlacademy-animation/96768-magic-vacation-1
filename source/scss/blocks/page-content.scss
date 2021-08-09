@@ -9,7 +9,12 @@
   height: 0;
   background: $c-dark;
   z-index: 20;
-  transition: height 0.3s ease-out;
+  transition: height 0.45s ease-out;
+  opacity: 0;
+  pointer-events: none;
+  &.is-process {
+    opacity: 1;
+  }
   &.is-active {
     height: 100%;
   }
