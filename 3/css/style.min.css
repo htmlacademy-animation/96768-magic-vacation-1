@@ -1772,7 +1772,12 @@ body.is-loaded .page-header__menu a.active::after {
   height: 0;
   background: #5f458c;
   z-index: 20;
-  transition: height 0.3s ease-out;
+  transition: height 0.45s ease-out;
+  opacity: 0;
+  pointer-events: none;
+}
+.page-content__overlay.is-process {
+  opacity: 1;
 }
 .page-content__overlay.is-active {
   height: 100%;

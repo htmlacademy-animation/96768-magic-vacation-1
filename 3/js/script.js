@@ -13285,9 +13285,14 @@ __webpack_require__.r(__webpack_exports__);
       if (menuLinks[i].dataset.href === `prizes`) {
         e.preventDefault();
         const overlay = document.querySelector(`.page-content__overlay`);
+        overlay.classList.add(`is-process`);
         overlay.classList.add(`is-active`);
         overlay.addEventListener(`transitionend`, function () {
           window.location.href = menuLinks[i].href;
+          overlay.classList.remove(`is-process`);
+          setTimeout(() => {
+            overlay.classList.remove(`is-active`);
+          }, 0);
         });
       }
     });
