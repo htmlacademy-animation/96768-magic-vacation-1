@@ -1,0 +1,21 @@
+.page-content {
+  position: relative;
+}
+.page-content__overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  background: $c-dark;
+  z-index: 20;
+  transition: height 0.45s ease-out;
+  opacity: 0;
+  pointer-events: none;
+  &.is-process {
+    opacity: 1;
+  }
+  &.is-active {
+    height: 100%;
+  }
+}
