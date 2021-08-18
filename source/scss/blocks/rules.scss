@@ -120,7 +120,7 @@
 .rules__item {
   position: relative;
   margin: 0 0 6.2rem;
-  padding-top: 0.6rem;
+  padding-top: 1rem;
   padding-left: 6.5rem;
   break-inside: avoid;
 
@@ -145,21 +145,27 @@
   }
 
   &::before {
-    content: counter(li);
-    counter-increment: li;
+    content: "";
     position: absolute;
-    top: 0;
+    top: 0.5rem;
     left: 0;
     width: 4.5rem;
     height: 4.5rem;
-    font-family: $font-alt;
-    font-weight: 400;
-    font-size: 2.4rem;
+
     background-color: $c-purple;
     border-radius: 50%;
     line-height: 5rem;
     text-align: center;
-
+    @media(prefers-reduced-motion: no-preference) {
+      transform: scale(0);
+      animation-delay: var(--delay);
+      animation-duration: var(--duration);
+      animation-timing-function: cubic-bezier(.09,1.92,.25,1.1);
+      animation-fill-mode: forwards;
+      .screen.active & {
+        animation-name: ruleItemBullet;
+      }
+    }
     @media (max-width: $tablet) and (orientation: portrait) {
       top: 1rem;
       width: 2.5rem;
@@ -176,13 +182,65 @@
       font-size: 1.4rem;
     }
   }
+  &::after {
+    content: counter(li);
+    counter-increment: li;
+    position: absolute;
+    top: 0.5rem;
+    left: 0;
+    width: 4.5rem;
+    height: 4.5rem;
+    font-family: $font-alt;
+    font-weight: 400;
+    font-size: 2.4rem;
+    border-radius: 50%;
+    line-height: 5rem;
+    text-align: center;
+
+    @media(prefers-reduced-motion: no-preference) {
+      opacity: 0;
+      animation-delay: calc(var(--delay) + 0.1s);
+      animation-duration: var(--duration);
+      animation-fill-mode: forwards;
+      animation-timing-function: cubic-bezier(.09,1.92,.25,1.2);
+      .screen.active & {
+        animation-name: ruleItemNumber;
+      }
+    }
+
+    @media (max-width: $tablet) and (orientation: portrait) {
+      top: 1rem;
+      width: 2.5rem;
+      height: 2.5rem;
+      line-height: 3rem;
+      font-size: 1.4rem;
+    }
+    @media (max-width: $mobile) and (orientation: landscape) {
+      top: 0.6rem;
+      width: 2.5rem;
+      height: 2.5rem;
+      line-height: 3rem;
+      font-size: 1.4rem;
+    }
+  }
 
   p {
     margin: 0;
-
     @media (max-width: $tablet) and (orientation: portrait) {
       min-height: calc(1.4rem * 2.2);
     }
+    @media(prefers-reduced-motion: no-preference) {
+      transform: translateX(15px);
+      animation-duration: calc(var(--duration) + 0.2s);
+      animation-timing-function: ease-in-out;
+      animation-delay: var(--delay);
+      animation-fill-mode: forwards;
+      opacity: 0;
+      .screen.active & {
+        animation-name: ruleItemText;
+      }
+    }
+
   }
 }
 
@@ -209,5 +267,84 @@
   @media (max-width: $mobile) and (orientation: landscape) {
     bottom: 2rem;
     right: 1.5rem;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    color: transparent;
+    animation-duration: 0.35s;
+    animation-delay: 1.3s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    .screen.active & {
+      animation-name: ruleLinkText;
+    }
+  }
+
+  &::before {
+    @media (prefers-reduced-motion: no-preference) {
+      opacity: 0;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: auto;
+      transform: translate(0, 0);
+      width: 6rem;
+      animation-delay: 0.95s;
+      animation-duration: 0.35s;
+      animation-timing-function: linear;
+      animation-fill-mode: forwards;
+      .screen.active & {
+        animation-name: ruleLinkBg;
+      }
+    }
+  }
+}
+
+@keyframes ruleItemBullet {
+  from {
+    transform: scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes ruleItemNumber {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes ruleItemText {
+  from {
+    opacity: 0;
+    transform: translateX(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes ruleLinkBg {
+  from {
+    opacity: 1;
+    width: 6rem;
+  }
+  to {
+    opacity: 1;
+    width: 100%;
+  }
+}
+
+@keyframes ruleLinkText {
+  from {
+    color: transparent;
+  }
+  to {
+    color: $c-dark;
   }
 }
